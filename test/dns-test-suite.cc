@@ -65,4 +65,3 @@ DnsTestSuite::DnsTestSuite ()
 
 // Do not forget to allocate an instance of this TestSuite
 static DnsTestSuite dnsTestSuite;
-

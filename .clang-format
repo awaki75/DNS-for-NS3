@@ -1,0 +1,9 @@
+BasedOnStyle: Google
+AccessModifierOffset: -2
+AlwaysBreakAfterReturnType: AllDefinitions
+BreakBeforeBraces: Allman
+ColumnLimit: 0
+ConstructorInitializerIndentWidth: 2
+ContinuationIndentWidth: 2
+IndentWidth: 2
+SpaceBeforeParens: Always

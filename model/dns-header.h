@@ -22,11 +22,12 @@
 #define DNS_HEADER_H
 
 #include "ns3/header.h"
-#include "ns3/nstime.h"
 #include "ns3/ipv4-address.h"
 #include "ns3/ipv4-header.h"
+#include "ns3/nstime.h"
 
-namespace ns3 {
+namespace ns3
+{
 //  4.1.2. Question section format
 
 //  The question section is used to carry the "question" in most queries,
@@ -66,8 +67,8 @@ class QuestionSectionHeader : public Header
 {
 public:
   QuestionSectionHeader ();
-  virtual ~ QuestionSectionHeader ();
-  
+  virtual ~QuestionSectionHeader ();
+
   /**
    * \brief Get the type ID.
    * \return the object TypeId
@@ -100,52 +101,59 @@ public:
    * \return size of the packet
    */
   virtual uint32_t Deserialize (Buffer::Iterator start);
-  
+
 private:
   std::string m_qName;
   uint16_t m_qType;
   uint16_t m_qClass;
-  
+
 public:
   /*
   * /brief Get and Set the qname
-  */  
-  std::string GetqName () const
+  */
+  std::string
+  GetqName () const
   {
     return m_qName;
   }
-  void SetqName (std::string qname)
+  void
+  SetqName (std::string qname)
   {
-    m_qName = qname;    
-  }   
-   
+    m_qName = qname;
+  }
+
   /*
   * /brief Get and Set the qtype
-  */  
-  uint16_t GetqType () const
+  */
+  uint16_t
+  GetqType () const
   {
     return m_qType;
   }
-  void SetqType (uint16_t qtype)
+  void
+  SetqType (uint16_t qtype)
   {
-    m_qType = qtype;    
-  }     
-  
+    m_qType = qtype;
+  }
+
   /*
   * /brief Get and Set the qclass
-  */  
-  uint16_t GetqClass () const
+  */
+  uint16_t
+  GetqClass () const
   {
     return m_qClass;
   }
-  void SetqClass (uint16_t qclass)
+  void
+  SetqClass (uint16_t qclass)
   {
-    m_qClass = qclass;    
-  }     
-      
-};// end of QuestionSectionHeader
+    m_qClass = qclass;
+  }
 
-static inline std::ostream& operator<< (std::ostream& os, const QuestionSectionHeader & header)
+};  // end of QuestionSectionHeader
+
+static inline std::ostream&
+operator<< (std::ostream& os, const QuestionSectionHeader& header)
 {
   header.Print (os);
   return os;
@@ -184,8 +192,6 @@ static inline std::ostream& operator<< (std::ostream& os, const QuestionSectionH
 //                field specifies the meaning of the data in the RDATA
 //                field.
 
-
-
 //CLASS           two octets which specify the class of the data in the
 //                RDATA field.
 
@@ -208,8 +214,8 @@ class ResourceRecordHeader : public Header
 {
 public:
   ResourceRecordHeader ();
-  virtual ~ ResourceRecordHeader ();
-  
+  virtual ~ResourceRecordHeader ();
+
   /**
    * \brief Get the type ID.
    * \return the object TypeId
@@ -248,84 +254,95 @@ private:
   uint16_t m_type;
   uint16_t m_class;
   uint32_t m_timeToLive;
-  std::string m_rData; // !< This contains the resource data (IP, CNAME or NS records)
-  uint16_t m_rDataLength; // !< the length of the resource data
+  std::string m_rData;     // !< This contains the resource data (IP, CNAME or NS records)
+  uint16_t m_rDataLength;  // !< the length of the resource data
 
 public:
   /*
   * /brief Get and Set thename
-  */  
-  std::string GetName () const
+  */
+  std::string
+  GetName () const
   {
     return m_name;
   }
-  void SetName (std::string name)
+  void
+  SetName (std::string name)
   {
-    m_name = name; // Added the "." for testing    
-  }   
-   
+    m_name = name;  // Added the "." for testing
+  }
+
   /*
   * /brief Get and Set the qtype
-  */  
-  uint16_t GetType () const
+  */
+  uint16_t
+  GetType () const
   {
     return m_type;
   }
-  void SetType (uint16_t type)
+  void
+  SetType (uint16_t type)
   {
-    m_type = type;    
-  }     
-  
+    m_type = type;
+  }
+
   /*
   * /brief Get and Set the qclass
-  */  
-  uint16_t GetClass () const
+  */
+  uint16_t
+  GetClass () const
   {
     return m_class;
   }
-  void SetClass (uint16_t cclass)
+  void
+  SetClass (uint16_t cclass)
   {
     m_class = cclass;
-  } 
-  
+  }
+
   /*
   * /brief Get and Set the qtype
-  */  
-  uint32_t GetTimeToLive () const
+  */
+  uint32_t
+  GetTimeToLive () const
   {
     return m_timeToLive;
   }
-  void SetTimeToLive (uint32_t timeToLive)
+  void
+  SetTimeToLive (uint32_t timeToLive)
   {
-    m_timeToLive = timeToLive;    
-  }    
+    m_timeToLive = timeToLive;
+  }
 
   /*
   * /brief Get and Set the Resource data
-  */  
-  std::string GetRData () const
+  */
+  std::string
+  GetRData () const
   {
     return m_rData;
   }
-  void SetRData (std::string rData)
+  void
+  SetRData (std::string rData)
   {
     m_rData = rData;
-    SetRdLength (); // Set the length of the resource data
-  } 
+    SetRdLength ();  // Set the length of the resource data
+  }
 
   /*
   * /brief Get and Set the resource data length
-  */  
-  uint16_t GetRdLength () const
+  */
+  uint16_t
+  GetRdLength () const
   {
     return m_rDataLength;
   }
-  void SetRdLength (void)
+  void
+  SetRdLength (void)
   {
-    m_rDataLength = m_rData.size ();    
-  }     
-};// end of ResourceRecordHeader
-
+    m_rDataLength = m_rData.size ();
+  }
+};  // end of ResourceRecordHeader
 
 // DNS Header (RFC 1035)
 //  4.1.1. Header section format
@@ -423,7 +440,7 @@ public:
 //                                  server may not wish to provide the
 //                                  information to the particular requester,
 //                                  or a name server may not wish to perform
-//                                  a particular operation (e.g., zonetransfer) 
+//                                  a particular operation (e.g., zonetransfer)
 //                                  for particular data.
 
 //                  6-15            Reserved for future use.
@@ -450,7 +467,7 @@ public:
   DNSHeader ();
   /*destrctr*/
   virtual ~DNSHeader ();
-    
+
   /**
    * \brief Get the type ID.
    * \return the object TypeId
@@ -483,199 +500,222 @@ public:
    * \return size of the packet
    */
   virtual uint32_t Deserialize (Buffer::Iterator start);
-  
+
 private:
   uint16_t m_id;
-  uint16_t m_flagSet; //!< QR|   Opcode  |AA|TC|RD|RA|   Z    |   RCODE   |
+  uint16_t m_flagSet;  //!< QR|   Opcode  |AA|TC|RD|RA|   Z    |   RCODE   |
   uint16_t m_qdCount;
   uint16_t m_anCount;
   uint16_t m_nsCount;
   uint16_t m_arCount;
-  
-  uint16_t m_totalRecordsCount; // !< the Total records added to the DNS header
-  
+
+  uint16_t m_totalRecordsCount;  // !< the Total records added to the DNS header
+
 public:
   /*
    * /brief Get and Set the ID
   */
-  uint16_t GetId () const
+  uint16_t
+  GetId () const
   {
     return m_id;
   }
-  void SetId ( uint16_t id)
+  void
+  SetId (uint16_t id)
   {
     m_id = id;
   }
-  
+
   /*
    * /brief Get and Set the flags which are given in the second octet 
-   */  
-  bool GetQRbit () const
+   */
+  bool
+  GetQRbit () const
   {
     return (m_flagSet & (1 << 15));
   }
-  void SetQRbit (bool flag)
+  void
+  SetQRbit (bool flag)
   {
-    (flag) ? m_flagSet |= (1 << 15) :  m_flagSet &= ~(1 << 15);
+    (flag) ? m_flagSet |= (1 << 15) : m_flagSet &= ~(1 << 15);
   }
-  
-  uint8_t GetOpcode () const
+
+  uint8_t
+  GetOpcode () const
   {
     return ((m_flagSet >> 11) & 0x000F);
   }
-  void SetOpcode (uint8_t opcode)
+  void
+  SetOpcode (uint8_t opcode)
   {
-    m_flagSet |= (opcode << 11);    
+    m_flagSet |= (opcode << 11);
   }
-  void ResetOpcode (void)
+  void
+  ResetOpcode (void)
   {
-    m_flagSet &= (0 << 11);    
-  }  
-  
-  bool GetAAbit () const
-  {
-    return (m_flagSet & (1 << 10));  
-  }
-  void SetAAbit (bool flag)
-  {
-    (flag) ? m_flagSet |= (1 << 10) :  m_flagSet &= ~(1 << 10);   
-  }
-  
-  bool GetTCbit () const
-  {
-    return (m_flagSet & (1 << 9));  
-  }
-  void SetTCbit (bool flag)
-  {
-    (flag) ? m_flagSet |= (1 << 9) :  m_flagSet &= ~(1 << 9);    
-  }  
-  
-  bool GetRDbit () const
-  {
-    return (m_flagSet & (1 << 8));  
-  }
-  void SetRDbit (bool flag)
-  {
-    (flag) ? m_flagSet |= (1 << 8) :  m_flagSet &= ~(1 << 8);    
-  }  
-  
-  bool GetRAbit () const
-  {
-    return (m_flagSet & (1 << 7));  
-  }
-  void SetRAbit (bool flag)
-  {
-    (flag) ? m_flagSet |= (1 << 7) :  m_flagSet &= ~(1 << 7);    
+    m_flagSet &= (0 << 11);
   }
 
-	uint8_t GetZcode () const
-	{
-		return ((m_flagSet >> 4) & 0x000F);
-	}
-  void SetZcode (void)
-	{
-		m_flagSet |= (0x00 << 4);
-	}
+  bool
+  GetAAbit () const
+  {
+    return (m_flagSet & (1 << 10));
+  }
+  void
+  SetAAbit (bool flag)
+  {
+    (flag) ? m_flagSet |= (1 << 10) : m_flagSet &= ~(1 << 10);
+  }
 
-  uint8_t GetRcode () const
+  bool
+  GetTCbit () const
+  {
+    return (m_flagSet & (1 << 9));
+  }
+  void
+  SetTCbit (bool flag)
+  {
+    (flag) ? m_flagSet |= (1 << 9) : m_flagSet &= ~(1 << 9);
+  }
+
+  bool
+  GetRDbit () const
+  {
+    return (m_flagSet & (1 << 8));
+  }
+  void
+  SetRDbit (bool flag)
+  {
+    (flag) ? m_flagSet |= (1 << 8) : m_flagSet &= ~(1 << 8);
+  }
+
+  bool
+  GetRAbit () const
+  {
+    return (m_flagSet & (1 << 7));
+  }
+  void
+  SetRAbit (bool flag)
+  {
+    (flag) ? m_flagSet |= (1 << 7) : m_flagSet &= ~(1 << 7);
+  }
+
+  uint8_t
+  GetZcode () const
+  {
+    return ((m_flagSet >> 4) & 0x000F);
+  }
+  void
+  SetZcode (void)
+  {
+    m_flagSet |= (0x00 << 4);
+  }
+
+  uint8_t
+  GetRcode () const
   {
     return ((m_flagSet >> 0) & 0x000F);
   }
-  void SetRcode (uint8_t opcode)
+  void
+  SetRcode (uint8_t opcode)
   {
-    m_flagSet |= (opcode << 0);    
-  }  
-  
+    m_flagSet |= (opcode << 0);
+  }
+
   /*
   * /brief Get and Set the number of entries in the question section
-  */  
-  uint16_t GetQdCount () const
+  */
+  uint16_t
+  GetQdCount () const
   {
     return m_qdCount;
   }
   void SetQdCount (/*uint8_t qdCount*/)
   {
-    m_qdCount ++;// = qdCount;  
-    m_totalRecordsCount ++;  
+    m_qdCount++;  // = qdCount;
+    m_totalRecordsCount++;
   }
   void ResetQdCount (/*uint8_t qdCount*/)
   {
     m_totalRecordsCount = m_totalRecordsCount - m_qdCount;
-    m_qdCount = 0; 
-  }    
-  
+    m_qdCount = 0;
+  }
+
   /*
   * /brief Get and Set the number of entries in the answer section
-  */  
-  uint16_t GetAnCount () const
+  */
+  uint16_t
+  GetAnCount () const
   {
     return m_anCount;
   }
   void SetAnCount (/*uint8_t anCount*/)
   {
-    m_anCount ++;//= anCount; 
-    m_totalRecordsCount ++;   
-  }  
+    m_anCount++;  //= anCount;
+    m_totalRecordsCount++;
+  }
   void ResetAnCount (/*uint8_t anCount*/)
   {
-    m_totalRecordsCount = m_totalRecordsCount - m_anCount;  
-    m_anCount = 0;   
-  }    
+    m_totalRecordsCount = m_totalRecordsCount - m_anCount;
+    m_anCount = 0;
+  }
   /*
   * /brief Get and Set the number of name server records in the authority section
-  */  
-  uint16_t GetNsCount () const
+  */
+  uint16_t
+  GetNsCount () const
   {
     return m_nsCount;
   }
   void SetNsCount (/*uint8_t nsCount*/)
   {
-    m_nsCount ++;//= nsCount; 
-    m_totalRecordsCount ++;   
-  }   
+    m_nsCount++;  //= nsCount;
+    m_totalRecordsCount++;
+  }
   void ResetNsCount (/*uint8_t nsCount*/)
   {
-    m_totalRecordsCount = m_totalRecordsCount - m_nsCount;    
-    m_nsCount  = 0;   
-  }     
+    m_totalRecordsCount = m_totalRecordsCount - m_nsCount;
+    m_nsCount = 0;
+  }
   /*
   * /brief Get and Set the number of entries in the additional section
-  */  
-  uint16_t GetArCount () const
+  */
+  uint16_t
+  GetArCount () const
   {
     return m_arCount;
   }
   void SetArCount (/*uint8_t arCount*/)
   {
-    m_arCount ++;//= arCount;
-    m_totalRecordsCount ++;    
+    m_arCount++;  //= arCount;
+    m_totalRecordsCount++;
   }
   void ResetArCount (/*uint8_t arCount*/)
   {
-    m_totalRecordsCount = m_totalRecordsCount - m_arCount;      
-    m_arCount = 0;    
-  }  
-  
+    m_totalRecordsCount = m_totalRecordsCount - m_arCount;
+    m_arCount = 0;
+  }
+
 private:
-  std::list <QuestionSectionHeader> m_qdList;
-  std::list <ResourceRecordHeader> m_rrList;
-  std::list <ResourceRecordHeader> m_nsList;
-  std::list <ResourceRecordHeader> m_arList;
-  
+  std::list<QuestionSectionHeader> m_qdList;
+  std::list<ResourceRecordHeader> m_rrList;
+  std::list<ResourceRecordHeader> m_nsList;
+  std::list<ResourceRecordHeader> m_arList;
+
   //TODO
   // Calculate maximum records can be added to the DNS header
   // For this implementation we assumed that number of records
   // will not create any fragmentation.
-  
-public:
 
-// name The question section header manipulation
-//\{
+public:
+  // name The question section header manipulation
+  //\{
   /**
    * \brief Add a Question to the DNS message
    * \param question the question that should add to DNS message
    */
-  void AddQuestion (QuestionSectionHeader question)
+  void
+  AddQuestion (QuestionSectionHeader question)
   {
     m_qdList.push_front (question);
     SetQdCount ();
@@ -685,46 +725,50 @@ public:
    * \brief Delete a Question from the DNS message
    * \param question the question that should delete from DNS message
    */
-  void DeleteQuestion (QuestionSectionHeader question)
+  void
+  DeleteQuestion (QuestionSectionHeader question)
   {
-    for (std::list <QuestionSectionHeader>::iterator it = m_qdList.begin (); it!= m_qdList.end (); it++)
+    for (std::list<QuestionSectionHeader>::iterator it = m_qdList.begin (); it != m_qdList.end (); it++)
     {
       if ((question.GetqName () == it->GetqName ()) &&
           (question.GetqType () == it->GetqType ()))
-      { 
+      {
         m_qdList.erase (it);
-        m_qdCount --;
-        m_totalRecordsCount --;
+        m_qdCount--;
+        m_totalRecordsCount--;
       }
-    }   
+    }
   }
 
   /**
    * \brief clear all the questions in the DNS message
    */
-  void ClearQuestions ()
+  void
+  ClearQuestions ()
   {
-    m_qdList.clear ();  
-    ResetQdCount ();   
+    m_qdList.clear ();
+    ResetQdCount ();
   }
 
   /**
    * \brief Get the list of the questions added to the DNS message
    * \returns the list of the questions added to the DNS message
    */
-  std::list<QuestionSectionHeader> GetQuestionList (void) const
+  std::list<QuestionSectionHeader>
+  GetQuestionList (void) const
   {
     return m_qdList;
-  } 
-//\}
+  }
+  //\}
 
-// name The answer section header manipulation
-//\{
+  // name The answer section header manipulation
+  //\{
   /**
    * \brief Add a Answer to the DNS message
    * \param answer the answer that should add to DNS message
    */
-  void AddAnswer (ResourceRecordHeader answer)
+  void
+  AddAnswer (ResourceRecordHeader answer)
   {
     m_rrList.push_front (answer);
     SetAnCount ();
@@ -734,46 +778,50 @@ public:
    * \brief Delete a answer from the DNS message
    * \param answeer the answer that should delete from DNS message
    */
-  void DeleteAnswer (ResourceRecordHeader answer)
+  void
+  DeleteAnswer (ResourceRecordHeader answer)
   {
-    for (std::list <ResourceRecordHeader>::iterator it = m_rrList.begin (); it!= m_rrList.end (); it++)
+    for (std::list<ResourceRecordHeader>::iterator it = m_rrList.begin (); it != m_rrList.end (); it++)
     {
       if ((answer.GetName () == it->GetName ()) &&
           (answer.GetType () == it->GetType ()))
-      { 
+      {
         m_rrList.erase (it);
-        m_anCount --;  
-        m_totalRecordsCount --;              
+        m_anCount--;
+        m_totalRecordsCount--;
       }
-    }   
+    }
   }
 
   /**
    * \brief clear all the answer in the DNS message
    */
-  void ClearAnswers ()
+  void
+  ClearAnswers ()
   {
-    m_rrList.clear ();  
-    ResetAnCount ();       
+    m_rrList.clear ();
+    ResetAnCount ();
   }
 
   /**
    * \brief Get the list of the answer added to the DNS message
    * \returns the list of the answer added to the DNS message
    */
-  std::list<ResourceRecordHeader> GetAnswerList (void) const
+  std::list<ResourceRecordHeader>
+  GetAnswerList (void) const
   {
     return m_rrList;
-  } 
-//\}
+  }
+  //\}
 
-// name The authority record section header manipulation
-//\{
+  // name The authority record section header manipulation
+  //\{
   /**
    * \brief Add a ns record to the DNS message
    * \param nsRecord the ns record that should add to DNS message
    */
-  void AddNsRecord (ResourceRecordHeader nsRecord)
+  void
+  AddNsRecord (ResourceRecordHeader nsRecord)
   {
     m_nsList.push_front (nsRecord);
     SetNsCount ();
@@ -783,46 +831,50 @@ public:
    * \brief Delete a ns record from the DNS message
    * \param nsRecord the ns record that should delete from DNS message
    */
-  void DeleteNsRecord (ResourceRecordHeader nsRecord)
+  void
+  DeleteNsRecord (ResourceRecordHeader nsRecord)
   {
-    for (std::list <ResourceRecordHeader>::iterator it = m_nsList.begin (); it!= m_nsList.end (); it++)
+    for (std::list<ResourceRecordHeader>::iterator it = m_nsList.begin (); it != m_nsList.end (); it++)
     {
       if ((nsRecord.GetName () == it->GetName ()) &&
           (nsRecord.GetType () == it->GetType ()))
-      { 
+      {
         m_nsList.erase (it);
-        m_nsCount --;
-        m_totalRecordsCount --;        
+        m_nsCount--;
+        m_totalRecordsCount--;
       }
-    }   
+    }
   }
 
   /**
    * \brief clear all the ns records in the DNS message
    */
-  void ClearNsRecords ()
+  void
+  ClearNsRecords ()
   {
     m_nsList.clear ();
-    ResetNsCount ();         
+    ResetNsCount ();
   }
 
   /**
    * \brief Get the list of the ns records added to the DNS message
    * \returns the list of the ns records added to the DNS message
    */
-  std::list<ResourceRecordHeader> GetNsRecordList (void) const
+  std::list<ResourceRecordHeader>
+  GetNsRecordList (void) const
   {
     return m_nsList;
-  } 
-//\}
+  }
+  //\}
 
-// name The additional record section header manipulation
-//\{
+  // name The additional record section header manipulation
+  //\{
   /**
    * \brief Add a additional record to the DNS message
    * \param aRecord the additional record that should add to DNS message
    */
-  void AddARecord (ResourceRecordHeader aRecord)
+  void
+  AddARecord (ResourceRecordHeader aRecord)
   {
     m_arList.push_front (aRecord);
     SetArCount ();
@@ -832,46 +884,49 @@ public:
    * \brief Delete a additional record from the DNS message
    * \param aRecord the additional record that should delete from DNS message
    */
-  void DeleteARecord (ResourceRecordHeader aRecord)
+  void
+  DeleteARecord (ResourceRecordHeader aRecord)
   {
-    for (std::list <ResourceRecordHeader>::iterator it = m_arList.begin (); it!= m_arList.end (); it++)
+    for (std::list<ResourceRecordHeader>::iterator it = m_arList.begin (); it != m_arList.end (); it++)
     {
       if ((aRecord.GetName () == it->GetName ()) &&
           (aRecord.GetType () == it->GetType ()))
-      { 
+      {
         m_arList.erase (it);
-        m_arCount --;
-        m_totalRecordsCount --;        
+        m_arCount--;
+        m_totalRecordsCount--;
       }
-    }   
+    }
   }
 
   /**
    * \brief clear all the additional records in the DNS message
    */
-  void ClearArList ()
+  void
+  ClearArList ()
   {
-    m_arList.clear (); 
-    ResetArCount ();     
+    m_arList.clear ();
+    ResetArCount ();
   }
 
   /**
    * \brief Get the list of the additional records added to the DNS message
    * \returns the list of the additional records added to the DNS message
    */
-  std::list<ResourceRecordHeader> GetArList (void) const
+  std::list<ResourceRecordHeader>
+  GetArList (void) const
   {
     return m_arList;
-  } 
-//\}
-     
-};// end DNSHeader
+  }
+  //\}
 
-static inline std::ostream& operator<< (std::ostream& os, const DNSHeader & header)
+};  // end DNSHeader
+
+static inline std::ostream&
+operator<< (std::ostream& os, const DNSHeader& header)
 {
   header.Print (os);
   return os;
 }
-} // end of ns-3 namespace
+}  // end of ns-3 namespace
 #endif /* HEADERS */
-
