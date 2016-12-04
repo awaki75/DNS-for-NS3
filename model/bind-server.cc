@@ -159,7 +159,7 @@ BindServer::LocalServerService (Ptr<Packet> nsQuery, Address toAddress)
   NS_LOG_FUNCTION (this);
 
   DNSHeader DnsHeader;
-  uint16_t qType, qClass;
+  // uint16_t qType, qClass;
   std::string qName;
   bool foundInCache = false;
   bool nsQuestion = false;
@@ -181,8 +181,8 @@ BindServer::LocalServerService (Ptr<Packet> nsQuery, Address toAddress)
     // We assumed that the local DNS does the recursive resolution process (i.e., in CDN networks)
 
     qName = questionList.begin ()->GetqName ();
-    qType = questionList.begin ()->GetqType ();
-    qClass = questionList.begin ()->GetqClass ();
+    // qType = questionList.begin ()->GetqType ();
+    // qClass = questionList.begin ()->GetqClass ();
 
     SRVTable::SRVRecordI cachedRecord = m_nsCache.FindARecordHas (qName, foundInCache);
 
@@ -278,8 +278,8 @@ BindServer::LocalServerService (Ptr<Packet> nsQuery, Address toAddress)
     // Always use the most recent answer, so that the previous server is considered.
     // However, the answer list contains all answers recursive name servers added.
     qName = answerList.begin ()->GetName ();
-    qType = answerList.begin ()->GetType ();
-    qClass = answerList.begin ()->GetClass ();
+    // qType = answerList.begin ()->GetType ();
+    // qClass = answerList.begin ()->GetClass ();
     forwardingAddress = answerList.begin ()->GetRData ();
 
     if (DnsHeader.GetOpcode () == 3)  // reply from the root server about a TLD server
@@ -467,7 +467,7 @@ BindServer::RootServerService (Ptr<Packet> nsQuery, Address toAddress)
   // Root name servers never create any NS requests.
 
   DNSHeader DnsHeader;
-  uint16_t qType, qClass;
+  // uint16_t qType, qClass;
   std::string qName;
   bool foundInCache = false;
 
@@ -478,8 +478,8 @@ BindServer::RootServerService (Ptr<Packet> nsQuery, Address toAddress)
   questionList = DnsHeader.GetQuestionList ();
 
   qName = questionList.begin ()->GetqName ();
-  qType = questionList.begin ()->GetqType ();
-  qClass = questionList.begin ()->GetqClass ();
+  // qType = questionList.begin ()->GetqType ();
+  // qClass = questionList.begin ()->GetqClass ();
 
   // Return the first record that matches the requested qName
   // This supports the RR method
@@ -517,7 +517,7 @@ void
 BindServer::TLDServerService (Ptr<Packet> nsQuery, Address toAddress)
 {
   DNSHeader DnsHeader;
-  uint16_t qType, qClass;
+  // uint16_t qType, qClass;
   std::string qName;
   bool foundInCache = false;
 
@@ -528,8 +528,8 @@ BindServer::TLDServerService (Ptr<Packet> nsQuery, Address toAddress)
   questionList = DnsHeader.GetQuestionList ();
 
   qName = questionList.begin ()->GetqName ();
-  qType = questionList.begin ()->GetqType ();
-  qClass = questionList.begin ()->GetqClass ();
+  // qType = questionList.begin ()->GetqType ();
+  // qClass = questionList.begin ()->GetqClass ();
 
   // Return the first record that matches the requested qName
   // This supports the RR method
@@ -567,7 +567,7 @@ void
 BindServer::ISPServerService (Ptr<Packet> nsQuery, Address toAddress)
 {
   DNSHeader DnsHeader;
-  uint16_t qType, qClass;
+  // uint16_t qType, qClass;
   std::string qName;
   bool foundInCache = false, foundAuthRecordinCache = false;
 
@@ -578,8 +578,8 @@ BindServer::ISPServerService (Ptr<Packet> nsQuery, Address toAddress)
   questionList = DnsHeader.GetQuestionList ();
 
   qName = questionList.begin ()->GetqName ();
-  qType = questionList.begin ()->GetqType ();
-  qClass = questionList.begin ()->GetqClass ();
+  // qType = questionList.begin ()->GetqType ();
+  // qClass = questionList.begin ()->GetqClass ();
 
   // Find for a record that exactly matches the query name.
   // if the query is exactly matches for a record in the ISP cache,
@@ -674,7 +674,7 @@ void
 BindServer::AuthServerService (Ptr<Packet> nsQuery, Address toAddress)
 {
   DNSHeader DnsHeader;
-  uint16_t qType, qClass;
+  // uint16_t qType, qClass;
   std::string qName;
   bool foundInCache = false;  //, foundAARecords = false;
 
@@ -685,8 +685,8 @@ BindServer::AuthServerService (Ptr<Packet> nsQuery, Address toAddress)
   questionList = DnsHeader.GetQuestionList ();
 
   qName = questionList.begin ()->GetqName ();
-  qType = questionList.begin ()->GetqType ();
-  qClass = questionList.begin ()->GetqClass ();
+  // qType = questionList.begin ()->GetqType ();
+  // qClass = questionList.begin ()->GetqClass ();
 
   NS_UNUSED (foundInCache);
 
